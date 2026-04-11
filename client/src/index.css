@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 220 20% 99%;
+		--foreground: 222.2 47.4% 11.2%;
+	}
+
+	body {
+		@apply bg-background text-foreground antialiased;
+		font-family: "Manrope", sans-serif;
+	}
+}
+
+@layer components {
+	.app-shell {
+		@apply min-h-screen bg-white text-slate-900;
+		background-image:
+			radial-gradient(circle at 12% -5%, rgba(15, 23, 42, 0.1), transparent 40%),
+			radial-gradient(circle at 85% 5%, rgba(51, 65, 85, 0.08), transparent 34%),
+			linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.app-shell::before,
+	.app-shell::after {
+		content: "";
+		position: absolute;
+		pointer-events: none;
+		filter: blur(70px);
+		opacity: 0.45;
+		z-index: 0;
+		animation: premiumFloat 14s ease-in-out infinite;
+	}
+
+	.app-shell::before {
+		height: 320px;
+		width: 320px;
+		left: -120px;
+		top: -100px;
+		background: radial-gradient(circle, rgba(148, 163, 184, 0.35), transparent 70%);
+	}
+
+	.app-shell::after {
+		height: 280px;
+		width: 280px;
+		right: -90px;
+		top: 12%;
+		background: radial-gradient(circle, rgba(71, 85, 105, 0.28), transparent 70%);
+		animation-delay: -6s;
+	}
+
+	.app-container {
+		@apply relative z-10 mx-auto w-full max-w-6xl px-4 py-6 md:px-8;
+	}
+
+	.glass-card {
+		@apply rounded-2xl border border-slate-200 bg-white/90 shadow-[0_14px_40px_rgba(2,6,23,0.08)] backdrop-blur;
+	}
+
+	.field-input {
+		@apply w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none transition-all focus:border-slate-900 focus:shadow-[0_0_0_3px_rgba(15,23,42,0.08)];
+	}
+
+	.btn-primary {
+		@apply rounded-xl bg-slate-900 px-4 py-2 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-black hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-70;
+	}
+
+	.btn-secondary {
+		@apply rounded-xl border border-slate-300 bg-white px-4 py-2 font-medium text-slate-800 transition-all hover:-translate-y-0.5 hover:border-slate-900 hover:text-slate-900 hover:shadow-sm;
+	}
+
+	.premium-card {
+		@apply rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_20px_50px_rgba(15,23,42,0.1)];
+	}
+
+	.premium-chip {
+		@apply rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-slate-700;
+	}
+
+	.premium-shimmer {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.premium-shimmer::after {
+		content: "";
+		position: absolute;
+		inset: -120% auto auto -80%;
+		height: 300%;
+		width: 45%;
+		transform: rotate(18deg);
+		background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5), transparent);
+		animation: premiumShimmer 3.8s linear infinite;
+	}
+}
+
+@layer utilities {
+	.app-shell .text-cyan-200,
+	.app-shell .text-cyan-300,
+	.app-shell .text-cyan-100,
+	.app-shell .text-cyan-300\/90 {
+		@apply text-slate-900;
+	}
+
+	.app-shell .text-slate-100,
+	.app-shell .text-slate-200,
+	.app-shell .text-slate-300 {
+		@apply text-slate-700;
+	}
+}
+
+@keyframes premiumFloat {
+	0%,
+	100% {
+		transform: translateY(0px) translateX(0px);
+	}
+	50% {
+		transform: translateY(12px) translateX(8px);
+	}
+}
+
+@keyframes premiumShimmer {
+	0% {
+		transform: translateX(0) rotate(18deg);
+	}
+	100% {
+		transform: translateX(260%) rotate(18deg);
+	}
+}
